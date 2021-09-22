@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+
+</head>
+
+<body>
+
+    <button id='btn' name='btn' onclick='top300_sub()'>채널Top5의 구독자 vs. 비디오 vs. view</button>
+    <!-- <button id='btn2' name='btn2' onclick="drawChart()">차트출력</button> -->
+    <button id='btn2' name='btn2' onclick="top300_sub_video()">비디오수</button>
+
+    <div id='infomation' style="width: 900px; height: 500px;">
+
+
+    </div>
+
+    <div id='infomation2' style="width: 900px; height: 500px;">
+
+
+    </div>
+
+    <div id='infomation3' style="width: 900px; height: 500px;">
+
+
+    </div>
+
+    <script>
+        google.charts.load('current', { 'packages': ['corechart'] });
+        // google.charts.setOnLoadCallback(BasicChart);
+
+        function top300_sub() {
+            const xhttp = new XMLHttpRequest();
+            xhttp.onreadystatechange = function () {
+                if (this.readyState == 4 && this.status == 200) {
+                    // data = app.py에서 return 받은 Crawling.interparkcrawling(word)결과값
+                    data = this.responseText;
+                    data = JSON.parse(data);
+                    console.log(data)
+                    document.getElementById("infomation").innerHTML = data[0]
+
+
+                    var data_select = google.visualization.arrayToDataTable([
+                        ['채널명', '구독자 수'],
+                        [data[0][0], Number(data[0][2])],
+                        [data[1][0], Number(data[1][2])],
+                        [data[2][0], Number(data[2][2])],
+                        [data[3][0], Number(data[3][2])],
+                        [data[4][0], Number(data[4][2])]
+                    ]);
+
+                    var data_select2 = google.visualization.arrayToDataTable([
+                        ['채널명', 'video 수'],
+                        [data[0][0], Number(data[0][4])],
+                        [data[1][0], Number(data[1][4])],
+                        [data[2][0], Number(data[2][4])],
+                        [data[3][0], Number(data[3][4])],
+                        [data[4][0], Number(data[4][4])]
+                    ]);
+
+                    var data_select3 = google.visualization.arrayToDataTable([
+                        ['채널명', 'view 수'],
+                        [data[0][0], Number(data[0][3])],
+                        [data[1][0], Number(data[1][3])],
+                        [data[2][0], Number(data[2][3])],
+                        [data[3][0], Number(data[3][3])],
+                        [data[4][0], Number(data[4][3])]
+                    ]);
+
+                
+                    
+                    var options = {
+                        title: 'TOP5 구독자 수'
+                    };
+                    var options2 = {
+                        title: 'TOP5 Video 수'
+                    };
+                    var options3 = {
+                        title: 'TOP5 View 수'
+                    };
+                    
+                    
+                    var chart = new google.visualization.PieChart(document.getElementById('infomation'));
+                    var chart2 = new google.visualization.PieChart(document.getElementById('infomation2'));
+                    var chart3 = new google.visualization.PieChart(document.getElementById('infomation3'));
+
+                    chart.draw(data_select, options);
+                    chart2.draw(data_select2, options2);
+                    chart3.draw(data_select3, options3);
+
+
+                }
+            };
+            xhttp.open("POST", "crawling2");    // http://ip:port/insert
+            xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+            xhttp.send();
+        };
+
+
+
+
+
+        function top300_sub_video() {
+            const xhttp = new XMLHttpRequest();
+            xhttp.onreadystatechange = function () {
+                if (this.readyState == 4 && this.status == 200) {
+                    // data = app.py에서 return 받은 Crawling.interparkcrawling(word)결과값
+                    datas = this.responseText;
+                    datas = JSON.parse(datas);
+                    console.log(datas)
+                    document.getElementById("infomation").innerHTML = datas[1]
+
+
+                    var data_select = google.visualization.arrayToDataTable([
+                        ['채널명', 'video 수'],
+                        [datas[0][0], Number(datas[0][4])],
+                        [datas[1][0], Number(datas[1][4])],
+                        [datas[2][0], Number(datas[2][4])],
+                        [datas[3][0], Number(datas[3][4])],
+                        [datas[4][0], Number(datas[4][4])]
+                    ]);
+
+                    // var data_select = google.visualization.arrayToDataTable([
+                    //     ['채널명', 'video 수'],
+                    //     ['blackpink', 500],
+                    //     ['아무거나', 400],
+                    //     ['제발', 200],
+                    //     ['되어라', 20],
+                    //     ['ㅇㅇㅇㅇ', 1]
+                    // ]);
+                    var options = {
+                        title: 'TOP5 Video 수'
+                    };
+
+                    var chart = new google.visualization.PieChart(document.getElementById('infomation2'));
+
+                    chart.draw(data_select, options);
+
+
+                }
+            };
+            xhttp.open("POST", "crawling3");    // http://ip:port/insert
+            xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+            xhttp.send();
+        };
+
+    </script>
+
+
+    <!-- <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"> -->
+
+
+
+
+
+</body>
+
+</html>

@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+
+
+</head>
+
+<body>
+    입력창<input type="text" id="word">
+
+
+    <button id="btn" name="btn" onclick="word()">버튼</button>
+    <a href="crawling">클릭해</a>
+
+    <br>
+    <hr><br>
+
+    <div id="infomation" , class="infomation">
+
+    </div>
+
+
+
+
+    <script>
+
+        function word() {
+            alert("키워드 입력");
+            const xhttp = new XMLHttpRequest();
+            xhttp.onreadystatechange = function () {
+                if (this.readyState == 4 && this.status == 200) {
+                    // data = app.py에서 return 받은 Crawling.interparkcrawling(word)결과값
+                    data = this.responseText;
+                    data = JSON.parse(data);
+                    console.log(data)
+                    for (i in data) {
+                        document.getElementById("infomation").innerHTML += data[i].img_url+'<br>'
+                        document.getElementById("infomation").innerHTML += data[i].trip_name+'<br>'
+                        document.getElementById("infomation").innerHTML += data[i].trip_page+'<br>'
+                    }
+                   
+                }
+            };
+            xhttp.open("POST", "crawling2");    // http://ip:port/insert
+            xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+
+            queryString = "word=" + document.getElementById("word").value;
+            console.log(queryString)
+            xhttp.send(queryString);
+        };
+
+
+
+
+    </script>
+</body>
+
+</html>

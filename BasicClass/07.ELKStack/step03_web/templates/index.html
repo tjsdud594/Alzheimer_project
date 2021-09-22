@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+
+    <button onclick="dataReq()">클릭</button>
+
+
+    <br>
+    <hr> <br>
+
+    <!-- 
+        tag의 속성으로 css를 적용하는 inline 방식
+        tag가 존재하나 안보이게 하는 방식
+        단 display : block 으로 할 경우 보임
+
+        style="display: none;" -->
+
+    <!--  -->
+    <table id="t" border="1" style="display: none;">
+        <!-- <tr>
+            <th>key</th>
+            <th>doc_count</th>
+        </tr> -->
+
+        <div id="dataview">
+
+
+        </div>
+    </table>
+
+
+    
+
+    <script>
+
+        /*
+        1단계 : 응답받은 데이터를 json 포멧의 객체로 변환
+        2단계 : key로 데이터들을 뽑아서 div tag에 html의 table로 생성
+        */
+        function dataReq() {
+            const xhttp = new XMLHttpRequest();
+            xhttp.onreadystatechange = function () {
+                if (this.readyState == 4 && this.status == 200) {
+                    data = this.responseText;
+                    data = "[" + data + "]"
+                    data = eval("(" + data + ")")
+                    // data = JSON.parse(data)
+                    console.log(data);
+
+                    // table 스타일을 block값으로 수정
+                    // style="display: none;"
+                    document.getElementById("t").style.display = "block";
+
+                    // table row 생성
+                    tb = "<table border='1'>"+"<tr><th>key</th><th>doc_count</th></tr>";
+                    // 데이터 존재 수 만큼 반복해서 결과값을 tr로 구성
+                    // tb 변수에 적재
+                    for (i = 0; i < data.length; i++) {
+                        tb = tb + "<tr><th>" + data[i].key + "</th><th>" + data[i].doc_count + "</th></tr>";
+                    }
+                    document.getElementById("dataview").innerHTML = tb;
+                // document.getElementById("t").innerHTML = tb + "</table>";
+                }
+            };
+            xhttp.open("GET", "showchart");
+            xhttp.send();
+        }
+
+    </script>
+</body>
+
+</html>

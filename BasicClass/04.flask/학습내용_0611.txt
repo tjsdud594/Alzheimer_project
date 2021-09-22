@@ -1,0 +1,60 @@
+학습 내용
+
+* 개발자 관점 &  사용자(client) 관점에서 늘 고민하고 답안 도출
+
+1. flask로 웹 적응
+
+
+2. web 개발 및 관리의 필수 학문
+    1. http
+        - REST(restful api)
+            get/post/put/delete 방식과 url을 의미론적으로 처리
+        - http 요청 방식의 default
+            get
+        - get을  제외한 모든 방식은 코드로 방식 처리가 가능하게 설정
+
+
+
+
+    2. 요청 처리 / 응답 처리
+    3. client 접속 ~ 상태 유지(로그인 ~ 로그아웃) 까지의 처리 기술
+        : 세션()과 쿠키(상태유지 데이터를 client 시스템에 저장)
+        : jwt 라는 토큰 기술(암호화)
+            - jupyter notebook 실행시 자동 로그인
+            간혹 직접 로그인 시도해야 할 경우?
+            콘솔창에 token value 복사 붙여넣기 작업
+
+        : 브라우저의 메모리에 데이터 저장하는 기술
+            - java script 기반으로 html API 기술 필수
+
+    4. web page간의 이동 기술
+        http://google.com : 구글의 main(index)
+            ->id/pw 입력 -> 인증 후의 화면 (상태유지가 가능한 웹 프로그램 언어로 개발된 page(jsp(java base)/asp(ms)/php(java script)))
+            -> 링크/버튼 클릭해서 화면이동(web page이동) or page이동없이 비동기 처리 기술로 서버랑 소통
+    5. 용어
+        1. 라우트 : 최적의 경로 설정 / url 설정
+        2. 실행, 렌더링...
+            브라우저 실행되는 흐름
+
+        ...
+
+3. 실습 단계
+    1단계
+        app.py 파일 하나 개발해서 실행
+        - app01.py 이 모든 요청 받고 응답도 이 파일 하나로 처리
+
+        @app.route('/')
+            http://127.0.0.1:5000/
+
+        @app.route('/playdata')
+            http://127.0.0.1:5000/playdata
+
+    2단계
+        - page이동 기술
+        app02.py -> html을 통해서 응답
+
+    3단계   
+        - 동일한 url이라 하더라도 라우터 설정에 따른 방식별 page이동 기술
+
+    4단계
+        - html form에 데이터 입력 전송 -> app04.py -> 새로운 html로 응답
