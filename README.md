@@ -18,9 +18,9 @@ https://wikidocs.net/53383
         DATABASES = {
             'default': {
                 'ENGINE': 'django.db.backends.postgresql',
-                'NAME': 'metrisdata',
-                'USER': 'postgres',
-                'PASSWORD': 'pass1234',
+                'NAME': 'metrisdata',   >> 생성한 PostgreSQL DB 이름
+                'USER': 'postgres',     >> 생성한 PostgreSQL DB user 이름
+                'PASSWORD': 'pass1234', >> 생성한 PostgreSQL DB 패스워드
                 'HOST': '127.0.0.1',
                 'PORT': '5432',
             }
