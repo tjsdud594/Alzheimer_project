@@ -7,7 +7,9 @@ from django.views.decorators.csrf import csrf_exempt
 from Backend import settings
 from . import forms
 from .apps import FunctionConfig
+from .models import PredData
 from django.shortcuts import render
+import cv2
 
 @csrf_exempt # form post 요청을 받을 때 csrf 토큰없이 요청할 수 있도록 처리.
 def predict(request):
@@ -25,22 +27,19 @@ def predict(request):
         
         image_arr = np.array(image_resize) #PIL 이미지 타입을 ndarray 변환
 
-        
-        image_arr = image_arr/255. # 정규화
+        image_c = image_arr.copy()
+        image_color = cv2.cvtColor(image_c, cv2.COLOR_GRAY2RGB)
+
+        image_arr = image_color/255. # 정규화
 
         input_tensor = image_arr[np.newaxis, ...] # 임시모델 말고 개량모델 완성시 해당 코드 변경 필요!
 
         model = FunctionConfig.model
         pred = model.predict(input_tensor) #출력층 activation: softmax 
-        lab = ['mild','moderate','normal','very-mild']
-        cls = np.where(pred.argmax()) 
-        print('=========================================',pred[0,0], pred[0,1],pred[0,2],pred[0,3])
+        cls = pred
 
-        # save_path = os.path.join(settings.MEDIA_ROOT, img_field.name)
-        # print(save_path)
-        # image.save(save_path) #PIL Image객체.save(경로) : 이미지 저장.
-        
-        
+
+
         result = {
                 'result':str(cls),
                 'mild': float(pred[0,0]),
@@ -48,5 +47,20 @@ def predict(request):
                 'normal' : float(pred[0,2]),
                 'very_mild' : float(pred[0,3]),
                 }
+
+
+        try :
+            test = PredData(
+                            result = result['result'], 
+                            mild = result['mild'], 
+                            moderate = result['moderate'],
+                            normal = result['normal'], 
+                            very_mild = result['very_mild'], 
+                            )
+            test.save()
+        except :
+            test  = None
+
         return render(request, 'function/response.html', result) 
+
 
