@@ -18,6 +18,8 @@ from django.urls import path, include
 import home.views
 import function.views
 import user.views
+from django.conf.urls.static import static
+from django.conf import settings
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -25,3 +27,6 @@ urlpatterns = [
     path('function/', include('function.urls')),
     path('user/', user.views.user, name='user'),
 ]
+
+# image root
+urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

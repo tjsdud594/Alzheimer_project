@@ -15,6 +15,7 @@ class PredData(models.Model) :
     very_mild =  models.FloatField()
     mild= models.FloatField()
     moderate =  models.FloatField()
+    img_url = models.CharField(max_length = 500)
 
     def __str__(self) :
         return self.result
