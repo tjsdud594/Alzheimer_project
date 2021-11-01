@@ -48,7 +48,7 @@ def predict(request):
                 'moderate' : float(pred[0,1]),
                 'normal' : float(pred[0,2]),
                 'very_mild' : float(pred[0,3]),
-                'img_url':"/media/{}".format(img_field.name)
+                'img_url' : "/media/{}".format(img_field.name)  
                 }
 
 
@@ -56,7 +56,7 @@ def predict(request):
             test = PredData(
                             result = result['result'], 
                             mild = result['mild'], 
-                            moderate = result['moderate'],
+                            moderate = result['moderate'], 
                             normal = result['normal'], 
                             very_mild = result['very_mild'],
                             img_url = result['img_url']
