@@ -99,7 +99,7 @@ def predict(request):
                 'moderate' : float(pred[0,1]),
                 'normal' : float(pred[0,2]),
                 'very_mild' : float(pred[0,3]),
-                'img_url' : "/media/img.png"  
+                'img_url' : path_img  
                 }
 
 
