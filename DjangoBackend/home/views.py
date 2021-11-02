@@ -3,4 +3,4 @@ from django.shortcuts import render
 # 함수를 정의
 
 def home(request): # request 가 들어오면
-    return render(request, 'home/index.html')
+    return render(request, 'home/main.html')

@@ -37,8 +37,6 @@ def predict(request):
         # Making AWS Session
         session = boto3.Session(aws_access_key_id=AWS_ACCESS_KEY_ID, aws_secret_access_key=AWS_SECRET_ACCESS_KEY)
 
-        # Creating S3 Resource From the Session.
-        s3 = session.resource('s3')
 
         # create Key => timestamp
         time_str = str(time.time())
@@ -59,6 +57,21 @@ def predict(request):
                     'ACL' : 'public-read',
                 }
         )
+
+        # aws 연결결과 확인
+        # aws_result = s3_client.upload_fileobj.get('ResponseMetadata')
+        # if aws_result.get('HTTPStatusCode') == 200:
+        #     print('File Uploaded Successfully')
+        # else:
+        #     print('File Not Uploaded')
+        #     return {
+        #     'Response' :  
+        #         {
+        #             'Message': 'File Not Uploaded', 
+        #             'Result' : 'Error',
+        #             'Details': 'Error occured while uploading masking image'
+        #         }
+        #     }
 
         # aws에서 img download
         path_img = "https://alzheimer-django.s3.us-east-1.amazonaws.com/" + time_str
@@ -116,6 +129,8 @@ def predict(request):
         except :
             test  = None
 
-        return render(request, 'function/response.html', result) 
-
+        return render(request, 'function/result.html', {'result' : test}) 
+        # result_str = json.dumps(result)   #Dictionary 를 JSON 문자열로 변환.
+    
+        # return HttpResponse(result_str)
 

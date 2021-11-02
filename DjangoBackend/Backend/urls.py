@@ -23,9 +23,9 @@ from django.conf import settings
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', home.views.home, name='index'), 
+    path('', home.views.home, name='main'), 
     path('function/', include('function.urls')),
-    path('user/', user.views.user, name='user'),
+    path('user/', include('user.urls')),
 ]
 
 # image root
