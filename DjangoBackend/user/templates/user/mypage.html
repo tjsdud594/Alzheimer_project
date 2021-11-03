@@ -21,16 +21,43 @@
         </div>
 
     </div>
-    <div id="products" class="row list-group">
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <td><b>Class</b></td> 
+                <td><b>mild 확률 </b></td>
+                <td><b>moderate 확률</b></td>
+                <td><b>normal 확률 </b></td>
+                <td><b>very mild 확률 </b></td>
+            </tr>
+        </thead>
+        <tbody>
+        {% for post in object_list %}
+        <tr>
+            <td>{{post.result}}</td>
+            <td>{{post.mild}}</td>
+            <td> {{post.moderate}}</td>
+            <td>{{post.normal}}</td>
+            <td>{{post.very_mild}}</td>
+        </tr>
+        {{objects}}
+        {{object}}
+
+        {% endfor %}
+        </tbody>
+    </table>
+    <!-- <div id="products" class="row list-group">
         <div class="item  col-xs-4 col-lg-4">
             <div class="thumbnail">
                 <img class="group list-group-image" src="http://placehold.it/400x250/000/fff" alt="" />
                 <div class="caption">
                     <h4 class="group inner list-group-item-heading">
                         Product title</h4>
+                        {% for post in result_list %}
                     <p class="group inner list-group-item-text">
-                        Product description... Lorem ipsum dolor sit amet, consectetuer adipiscing elit,
-                        sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat.</p>
+                            {{post}}
+                        {% endfor %}
+                    </p>
                     <div class="row">
                         <div class="col-xs-12 col-md-6">
                             <p class="lead">
@@ -43,7 +70,7 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div> -->
 </div>
 <footer class="footer">
     <a href='tel:010-9962-4852'><img src="../static/image/telephone.png" alt="tele" width="50" height="50"></a>

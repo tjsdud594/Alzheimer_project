@@ -10,5 +10,5 @@ def user(request):
 class PostListView(ListView):
     template_name = "user/mypage.html"  #목록페이지 (응답페이지)
     model = PredData #데이터를 조회할 Model클래스
-    paginate_by = 10 # 한번(한페이지)에 10개씩만 조회
-
+    # paginate_by = 10 # 한번(한페이지)에 10개씩만 조회
+    # 통 DB 는 object_list 로 넘어간다.
