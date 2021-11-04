@@ -107,18 +107,16 @@ def predict(request):
         # image.save(save_path) #PIL Image객체.save(경로) : 이미지 저장.
 
         result = {
-                'result':str(cls),
-                'mild': float(pred[0,0]),
-                'moderate' : float(pred[0,1]),
-                'normal' : float(pred[0,2]),
-                'very_mild' : float(pred[0,3]),
+                'mild': round(float(pred[0,0]), 5),
+                'moderate' : round(float(pred[0,1]), 5),
+                'normal' : round(float(pred[0,2]), 5),
+                'very_mild' : round(float(pred[0,3]), 5),
                 'img_url' : path_img  
                 }
 
 
         try :
             test = PredData(
-                            result = result['result'], 
                             mild = result['mild'], 
                             moderate = result['moderate'], 
                             normal = result['normal'], 

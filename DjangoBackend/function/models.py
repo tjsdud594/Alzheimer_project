@@ -10,7 +10,7 @@ from django.db import models
 #         return self.title
 
 class PredData(models.Model) :
-    result = models.CharField(max_length = 50)
+    create_at = models.DateTimeField(verbose_name="검사일시", auto_now_add=True)
     normal = models.FloatField()
     very_mild =  models.FloatField()
     mild= models.FloatField()
@@ -18,4 +18,4 @@ class PredData(models.Model) :
     img_url = models.CharField(max_length = 300)
 
     def __str__(self) :
-        return self.result
+        return f"No.{self.pk}/생성날짜.{self.create_at}"
