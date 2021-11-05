@@ -49,8 +49,8 @@
             </tbody>
         </table> -->
         <div id="products" class="row list-group">
+            {% for post in object_list %}
             <div class="item  col-xs-4 col-lg-4">
-                {% for post in object_list %}
                 <div class="thumbnail">
                     <img class="group list-group-image" src="{{post.img_url}}" alt="" />
                     <div class="caption">
@@ -73,8 +73,8 @@
                         </div>
                     </div>
                 </div>
-                {% endfor %}
             </div>
+            {% endfor %}
         </div>
     </div>
     <footer class="footer">

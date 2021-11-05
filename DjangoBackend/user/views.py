@@ -16,7 +16,7 @@ def board_detail(request, pk):
     # pk 에 해당하는 글을 가지고 올 수 있게 된다.
     return render(request, 'user/board_detail.html', {'board':board})  
 
-@method_decorator(login_required, name="dispatch")
+# @method_decorator(login_required, name="dispatch")
 class PostListView(ListView):
     template_name = "user/mypage.html"  #목록페이지 (응답페이지)
     model = PredData #데이터를 조회할 Model클래스
