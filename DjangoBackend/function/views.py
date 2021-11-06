@@ -5,10 +5,12 @@ import numpy as np
 import PIL.Image as PILI 
 from django.http import HttpResponse
 from django.views.decorators.csrf import csrf_exempt
+from tensorflow.python.framework.tensor_conversion_registry import get
 from Backend import settings
 from . import forms
 from .apps import FunctionConfig
 from .models import PredData
+from account.models import CustomUser
 from django.shortcuts import render
 import cv2
 import boto3
@@ -17,6 +19,7 @@ import time
 import sys
 import hashlib
 import base64
+from django.contrib.auth import get_user
 
 @csrf_exempt # form post 요청을 받을 때 csrf 토큰없이 요청할 수 있도록 처리.
 def predict(request):
@@ -105,23 +108,32 @@ def predict(request):
         # save_path = os.path.join(settings.MEDIA_ROOT, img_field.name)
         # print(save_path)
         # image.save(save_path) #PIL Image객체.save(경로) : 이미지 저장.
+        
 
         result = {
+
                 'mild': round(float(pred[0,0]), 5),
                 'moderate' : round(float(pred[0,1]), 5),
                 'normal' : round(float(pred[0,2]), 5),
                 'very_mild' : round(float(pred[0,3]), 5),
-                'img_url' : path_img  
+                'img_url' : path_img,
+                'email' : request.user.email
                 }
+        print(result)
+        # print(get_user(request))
+        print('----------------', get_user(request).get_email_field_name)
+        print(type(get_user(request)))
 
 
         try :
             test = PredData(
+
                             mild = result['mild'], 
                             moderate = result['moderate'], 
                             normal = result['normal'], 
                             very_mild = result['very_mild'],
-                            img_url = result['img_url']
+                            img_url = result['img_url'],
+                            email_id = CustomUser.objects.get(pk=request.user.email)
                             )
             test.save()
         except :

@@ -9,5 +9,5 @@ urlpatterns = [
     path('upload', TemplateView.as_view(template_name='function/upload.html'), name='upload'),
     # path('predict', views.predict, name='predict'),
     path('predict', views.predict, name='predict'),
-    path('', TemplateView)
+    path('', TemplateView),
 ]

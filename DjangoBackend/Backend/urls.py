@@ -26,6 +26,7 @@ urlpatterns = [
     path('', home.views.home, name='main'), 
     path('function/', include('function.urls')),
     path('user/', include('user.urls')),
+    path('account/', include('account.urls')),
 ]
 
 # image root
