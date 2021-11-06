@@ -1,0 +1,173 @@
+@charset 'utf-8';
+
+html {
+	font-family: 'Noto Sans KR', sans-serif;
+	font-size: 14px;
+	overflow: hidden;
+}
+
+body {
+	overflow: hidden;
+	color: rgb(29, 29, 31);
+	letter-spacing: -0.05em;
+	background: white;
+	overflow: hidden;
+
+}
+
+p {
+	line-height: 1.6;
+}
+
+a {
+	color: rgb(29, 29, 31);
+	text-decoration: none;
+}
+
+section img {
+	margin-top : -21%;
+	margin-left : 4%;	
+}
+
+body.before-load {
+	overflow: hidden;
+}
+
+.global-nav {
+	position: absolute;
+	top: 0;
+	left: 0;
+	z-index: 10;
+	width: 100%;
+	height: 44px;
+	padding: 0 1rem;
+}
+
+.local-nav {
+	position: absolute;
+	top: 45px;
+	left: 0;
+	z-index: 11;
+	width: 100%;
+	height: 52px;
+	padding: 0 1rem;
+	border-bottom: 1px solid #ddd;
+}
+
+.local-nav-sticky .local-nav {
+	position: fixed;
+	top: 0;
+	background: rgba(255, 255, 255, 0.1);
+	-webkit-backdrop-filter: saturate(180%) blur(15px);
+	-moz-backdrop-filter: saturate(180%) blur(15px);
+	-o-backdrop-filter: saturate(180%) blur(15px);
+	backdrop-filter: saturate(180%) blur(15px);
+}
+
+.global-nav-links,
+.local-nav-links {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	max-width: 1000px;
+	height: 100%;
+	margin: 0 auto;
+	font-weight: 500;
+}
+
+.global-nav-links {
+	justify-content: space-around;
+}
+
+.local-nav-links .product-name {
+	margin-right: auto;
+	font-size: 1.4rem;
+	font-weight: bold;
+}
+
+.local-nav-links a {
+	font-size: 0.8rem;
+}
+
+.local-nav-links a:not(.product-name) {
+	margin-left: 2em;
+}
+
+.scroll-section {
+	padding-top:50vh;
+    text-align: center;
+    font-size: 15px;
+}
+
+.emotiv-loader {
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    margin: 19%;
+  }
+.emotiv-loader p {
+    font-family: "Montserrat", sans-serif;
+    color: darkmagenta;
+  }
+  
+#spinner {
+    animation: 3s linear infinite both circle-animation;
+    display: block;
+    fill: transparent;
+    stroke: darkmagenta;
+    stroke-linecap: round;
+    stroke-dasharray: 461 461;
+    stroke-dashoffset: 461;
+    stroke-width: 3px;
+    transform-origin: 50% 50%;
+    transform: rotateZ(-90deg);
+  }
+  
+@keyframes circle-animation {
+    0% {
+      stroke-dashoffset: 461;
+    }
+    50% {
+      stroke-dashoffset: 0;
+    }
+    100% {
+      stroke-dashoffset: -461;
+    }
+  }
+@keyframes pulse {
+    from {
+      transform: scale3d(1, 1, 1);
+    }
+    50% {
+      transform: scale3d(1.05, 1.05, 1.05);
+    }
+    to {
+      transform: scale3d(1, 1, 1);
+    }
+  }
+#brain {
+    animation-name: pulse;
+    animation-duration: 3s;
+    animation-fill-mode: both;
+    animation-iteration-count: infinite;
+  }
+
+.loading {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	position: fixed;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	left: 0;
+	z-index: 100;
+	opacity: 0;
+	transition: 0.5s;
+}
+.before-load .container {
+    display: none;
+}
+.before-load .loading {
+	opacity: 1;
+}
