@@ -123,18 +123,33 @@
     <div class="container">
         <nav class="global-nav">
             <div class="global-nav-links">
-                <!-- <a href="../../result/templates/upload.html" class="global-nav-item">분석</a> -->
+                <!-- <a href="../../function/template/upload.html" class="global-nav-item">분석</a> -->
+                {% if user.is_authenticated %}
                 <a href="../../function/upload" class="global-nav-item">분석</a>
-                <a href="#" class="global-nav-item">마이페이지</a>
-            </div>
-        </nav>
-        <nav class="local-nav">
-            <div class="local-nav-links">
-                <!-- <a href="../../main/templates/main.html" class="product-name">Vrain</a> -->
-                <a href="../../" class="product-name">Vrain</a>
-                <!-- <a href="../../agreement/templates/login.html">로그인/&nbsp;회원가입</a> -->
-                <a href="../../user/login">로그인/&nbsp;회원가입</a>
-            </div>
+                <a href="../../user/mypage" class="global-nav-item">마이페이지</a>
+                {% endif %}
+                {% if not user.is_authenticated %}
+                <a href="{% url 'main' %}" class="global-nav-item" onclick="alert('회원만 이용할 수 있는 서비스입니다')">분석</a>
+                <a href="{% url 'main' %}" class="global-nav-item" onclick="alert('회원만 이용할 수 있는 서비스입니다')">마이페이지</a>
+                {% endif %}
+              </div>
+            </nav>
+            <nav class="local-nav">
+              {% if user.is_authenticated %}
+              <div class="local-nav-links">
+                <a href="" class="product-name">Vrain</a>
+                <!-- <a href="../../user/template/login.html">로그인/&nbsp;회원가입</a> -->
+                <h5>환영합니다&nbsp;{{user.name}}님!</h5>&nbsp;&nbsp;&nbsp;&nbsp;
+                <a href="{% url 'account:logout' %}">로그아웃</a>
+              </div>
+              {% endif %}
+              {% if not user.is_authenticated %}
+              <div class="local-nav-links">
+                <a href="" class="product-name">Vrain</a>
+                <!-- <a href="../../user/template/login.html">로그인/&nbsp;회원가입</a> -->
+                <a href="../../account/login">로그인/&nbsp;회원가입</a>
+              </div>
+              {% endif %}
         </nav>
         <!-- <section class="scroll-section"> -->
         <section class="scroll-section" style="padding-top: 20vh;">
