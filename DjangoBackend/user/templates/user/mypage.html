@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css">
     <link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css'>
     <link rel="stylesheet" href="../static/css/mypage.css">
+    <link rel="icon" href="../../static/image/logo1.ico" type="image/x-icon">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/prefixfree/1.0.7/prefixfree.min.js"></script>
 
 </head>
@@ -16,7 +17,7 @@
         <div class="well well-sm">
             <strong><a href="../../">Vrain</a></strong>
             <a href="../../function/upload" style="margin-left:3%;">분석</a>
-            <a href="../../" style="margin-left:3%;">로그아웃</a>
+            <a href="logout" style="margin-left:3%;">로그아웃</a>
             <div class="btn-group" style="margin-left:3%;">
                 <a href="#" id="list" class="btn btn-default btn-sm"><span class="glyphicon glyphicon-th-list">
                     </span>List</a> <a href="#" id="grid" class="btn btn-default btn-sm"><span
@@ -55,8 +56,11 @@
                     <img class="group list-group-image" src="{{post.img_url}}" alt="" />
                     <div class="caption">
                         <h4 class="group inner list-group-item-heading">
-                            생성 날짜{{post.create_at}} </h4>
-                        <p class="group inner list-group-item-text">
+                            분석자 email : {{post.email}}<br>
+                            </h4>
+                            <p class="group inner list-group-item-text">
+                            {{post}}
+                            생성 날짜{{post.create_at}}
                             <!-- normal : {{post.normal}} <br>
                             very mild moderate : {{post.very_mild}} <br>
                             mild moderate : {{post.mild}} <br>
@@ -68,13 +72,14 @@
                                     No.{{post.id}} </p>
                             </div>
                             <div class="col-xs-12 col-md-6">
-                                <a class="btn btn-success" href="{%url 'user:detail' post.pk%}">상세하게</a>
+                                <a class="btn btn-warning" href="{%url 'user:detail' post.pk%}" target='_blank'>상세하게</a>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
             {% endfor %}
+
         </div>
     </div>
     <footer class="footer">
