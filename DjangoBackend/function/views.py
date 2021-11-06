@@ -117,6 +117,7 @@ def predict(request):
                 'normal' : round(float(pred[0,2]), 5),
                 'very_mild' : round(float(pred[0,3]), 5),
                 'img_url' : path_img,
+                'img_name' : str(time_str),
                 'email' : request.user.email
                 }
         print(result)
@@ -133,6 +134,7 @@ def predict(request):
                             normal = result['normal'], 
                             very_mild = result['very_mild'],
                             img_url = result['img_url'],
+                            img_name = result['img_name'],
                             email_id = CustomUser.objects.get(pk=request.user.email)
                             )
             test.save()
