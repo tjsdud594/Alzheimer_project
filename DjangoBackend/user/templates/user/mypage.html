@@ -51,15 +51,17 @@
         </table> -->
         <div id="products" class="row list-group">
             {% for post in object_list %}
+            <!-- {{post.email_id}} -->
+            {% if user.pk == post.email_id %}
             <div class="item  col-xs-4 col-lg-4">
                 <div class="thumbnail">
                     <img class="group list-group-image" src="{{post.img_url}}" alt="" />
                     <div class="caption">
                         <h4 class="group inner list-group-item-heading">
-                            분석자 email : {{post.email}}<br>
+                            분석자 {{post.email}}<br>
                             </h4>
                             <p class="group inner list-group-item-text">
-                            {{post}}
+                            
                             생성 날짜{{post.create_at}}
                             <!-- normal : {{post.normal}} <br>
                             very mild moderate : {{post.very_mild}} <br>
@@ -68,8 +70,8 @@
                         </p>
                         <div class="row">
                             <div class="col-xs-12 col-md-6">
-                                <p class="lead">
-                                    No.{{post.id}} </p>
+                                <p class="lead" style="font-size:11px;">
+                                    {{post.img_name}} </p>
                             </div>
                             <div class="col-xs-12 col-md-6">
                                 <a class="btn btn-warning" href="{%url 'user:detail' post.pk%}" target='_blank'>상세하게</a>
@@ -78,6 +80,9 @@
                     </div>
                 </div>
             </div>
+            {% else %}
+            <!-- 둘이 같지 않다-->
+            {% endif %}
             {% endfor %}
 
         </div>
