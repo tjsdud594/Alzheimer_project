@@ -63,14 +63,21 @@ def signup(request):
                 return render(request, 'account/login.html', {"message" : "비밀번호가 일치하지 않습니다."})
 
         else:
-            try:
-                CustomUser.objects.get(email=request.POST['email'])
-                print(1.5)
-                return render(request, 'account/login.html', {"message" : "이미 가입된 이메일입니다"})
-            except:
-                print(2)
-                context = {"message" : "이메일 양식이 올바르지 않습니다."}
-                return render(request, 'account/login.html', {"message" : "이메일 양식이 올바르지 않습니다."})
+            print('===========name', request.POST['name'])
+
+            if not request.POST['name']:
+                print('이름이 없어요')
+                return render(request, 'account/login.html', {"message" : "이름을 입력해주세요"})
+
+            else:
+                try:
+                    CustomUser.objects.get(email=request.POST['email'])
+                    print(1.5)
+                    return render(request, 'account/login.html', {"message" : "이미 가입된 이메일입니다"})
+                except:
+                    print(2)
+                    context = {"message" : "이메일 양식이 올바르지 않습니다."}
+                    return render(request, 'account/login.html', {"message" : "이메일 양식이 올바르지 않습니다."})
     else:
         print(3)
         context = {"message" : "Wrong Mathod"}
