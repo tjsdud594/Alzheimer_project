@@ -7,6 +7,14 @@
   <title>분석</title>
   <link rel="stylesheet" href="{% static 'css/upload.css' %}">
   <link rel="stylesheet" href="{% static 'css/default.css' %}">
+
+  <script>
+    // alert('뜨나여?')
+    if ("{{message}}") {
+      alert("{{message}}")
+    }
+  </script>
+
 </head>
 
 
@@ -20,21 +28,24 @@
 
   <form method='post' action='{% url "function:predict" %}' enctype="multipart/form-data">
     {% csrf_token %}
-  <div class="image-upload-wrap">
-    <input class="file-upload-input" type='file' onchange="readURL(this);" accept="image/*" name='upimg'>
-    <div class="drag-text">
-      <h3>이미지를 드래그해주세요</h3>
+    <div class="image-upload-wrap">
+      <input class="file-upload-input" type='file' onchange="readURL(this);" accept="image/*" name='upimg'>
+      <div class="drag-text">
+        <h3>이미지를 드래그해주세요</h3>
+      </div>
     </div>
-  </div>
-  <div class="file-upload-content">
-    <img class="file-upload-image" src="#" alt="your image" />
+    <div class="file-upload-content">
+      <label>
+        <input type="text" placeholder='환자명을 넣어주세요' name='uptext'></input>
+      </label>
+      <img class="file-upload-image" src="#" alt="your image" />
     <div class="image-title-wrap">
-        
+
         <button type="button" onclick="removeUpload()" class="remove-image">삭제</button>
         <!-- <button type="button" class="upload-image onClick=" location.href='./result.html'">전송</button> -->
         
         <!-- <button type="button" class="upload-image onClick=" location.href='function/result'>전송</button> -->
-        <button type="submit" class="upload-image onClick=" >전송</button>
+        <button type="submit"  class="upload-image onClick=" onclick="checkvalue()">전송</button>
       </div>
     </div>
   </form>
@@ -43,4 +54,5 @@
 
 <script  src="{% static 'js/upload.js' %}"></script>
 </body>
+
 </html>

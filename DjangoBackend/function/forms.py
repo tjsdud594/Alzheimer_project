@@ -3,6 +3,7 @@ from .models import PredData
 
 class UploadForm(forms.Form):
     upimg = forms.ImageField()
+    uptext = forms.TextInput()
 
     class Meta:
         managed = False

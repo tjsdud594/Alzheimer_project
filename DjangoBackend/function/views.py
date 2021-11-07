@@ -25,11 +25,18 @@ from django.contrib.auth import get_user
 def predict(request):
     # 요청파라미터 - text: request.POST, file: request.FILES
     form = forms.UploadForm(request.POST, request.FILES)
+
     if form.is_valid(): #요청파라미터 검증. True: 검증 성공, False: 검증 실패
         clean_data = form.cleaned_data #Form에서 직접 값을 조회할 수 없다. form.cleaned_data: 검증을 통과한 
                                        #요청파라미터들을 딕셔너리로 반환. 이 딕셔너리를 이용해 조회
         img_field  = clean_data['upimg'] #업로드된 파일을 조회
-        print(img_field, type(img_field))
+        # print(img_field, type(img_field))
+
+        # contexts={
+        #     "upname" : request.POST['uptext']
+        # }
+        # print("request.Post 찍기", request.POST['uptext'])
+        # request.session['uptext'] = request.POST['uptext']
         
          # aws로 upload
         AWS_ACCESS_KEY_ID = "AKIA3MDEZOF62YYMEL5K"
@@ -78,7 +85,7 @@ def predict(request):
 
         # aws에서 img download
         path_img = "https://alzheimer-django.s3.us-east-1.amazonaws.com/" + time_str
-        print(path_img)
+        # print(path_img)
         TEMP_IMG_NAME = "media/img.png"
 
         time.sleep(2)
@@ -108,40 +115,47 @@ def predict(request):
         # save_path = os.path.join(settings.MEDIA_ROOT, img_field.name)
         # print(save_path)
         # image.save(save_path) #PIL Image객체.save(경로) : 이미지 저장.
-        
+        form2 = forms.UploadForm(request.POST)
+        if form2.is_valid():
+            result = {
 
-        result = {
-
-                'mild': round(float(pred[0,0]), 5),
-                'moderate' : round(float(pred[0,1]), 5),
-                'normal' : round(float(pred[0,2]), 5),
-                'very_mild' : round(float(pred[0,3]), 5),
-                'img_url' : path_img,
-                'img_name' : str(time_str),
-                'email' : request.user.email
-                }
-        print(result)
+                    'mild': round(float(pred[0,0]), 5),
+                    'moderate' : round(float(pred[0,1]), 5),
+                    'normal' : round(float(pred[0,2]), 5),
+                    'very_mild' : round(float(pred[0,3]), 5),
+                    'img_url' : path_img,
+                    'img_name' : str(time_str),
+                    'email' : request.user.email,
+                    'patient_name' : request.POST['uptext']
+                    }
+        # print(result)
         # print(get_user(request))
-        print('----------------', get_user(request).get_email_field_name)
-        print(type(get_user(request)))
+        # print('----------------', get_user(request).get_email_field_name)
+        # print(type(get_user(request)))
 
 
-        try :
-            test = PredData(
+            try :
+                test = PredData(
 
-                            mild = result['mild'], 
-                            moderate = result['moderate'], 
-                            normal = result['normal'], 
-                            very_mild = result['very_mild'],
-                            img_url = result['img_url'],
-                            img_name = result['img_name'],
-                            email_id = CustomUser.objects.get(pk=request.user.email)
-                            )
-            test.save()
-        except :
-            test  = None
+                                mild = result['mild'], 
+                                moderate = result['moderate'], 
+                                normal = result['normal'], 
+                                very_mild = result['very_mild'],
+                                img_url = result['img_url'],
+                                img_name = result['img_name'],
+                                email_id = CustomUser.objects.get(pk=request.user.email),
+                                patient_name = result['patient_name']
+                                )
+                test.save()
+            except :
+                test  = None
 
-        return render(request, 'function/result.html', {'result' : test}) 
+            return render(request, 'function/result.html', {'result' : test}) 
+            
+        else:
+            context = {"message" : "환자이름을 입력해주세요."}
+            print("3")
+            return render(request, 'function/upload.html', {"message" : "환자이름을 입력해주세요."}) 
         # result_str = json.dumps(result)   #Dictionary 를 JSON 문자열로 변환.
     
         # return HttpResponse(result_str)

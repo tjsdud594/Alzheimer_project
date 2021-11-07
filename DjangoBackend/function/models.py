@@ -21,6 +21,7 @@ class PredData(models.Model) :
     moderate =  models.FloatField()
     img_url = models.CharField(max_length = 300)
     img_name = models.CharField(max_length = 300)
+    patient_name = models.CharField(max_length= 50)
 
     def __str__(self) :
         return f"No.{self.pk}/생성날짜.{self.create_at}/email.{self.email}"
