@@ -115,8 +115,10 @@ def predict(request):
         # save_path = os.path.join(settings.MEDIA_ROOT, img_field.name)
         # print(save_path)
         # image.save(save_path) #PIL Image객체.save(경로) : 이미지 저장.
-        form2 = forms.UploadForm(request.POST)
-        if form2.is_valid():
+        check = request.POST['uptext']
+        print('check 해보자 check:', check, len(check))
+        
+        if request.POST['uptext']:
             result = {
 
                     'mild': round(float(pred[0,0]), 5),

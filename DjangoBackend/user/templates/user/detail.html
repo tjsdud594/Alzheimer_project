@@ -154,9 +154,9 @@
         <!-- <section class="scroll-section"> -->
         <section class="scroll-section" style="padding-top: 20vh;">
             <!-- <p>결과창 띄어주세요</p> -->
-            <p>
+            
                 <h2 style="padding-bottom:20px;">예측결과</h2>
-                환자이름 {{result.patient_name}}
+                <p style="padding-bottom:20px;">환자이름 : {{object.patient_name}}</p>
                 <!-- No: {{object.pk}} <br> -->
               <table class="table table-striped table-bordered table-hover">
                   <th>mild 확률</th>
@@ -171,7 +171,6 @@
                   </tr>
               </table>
       
-          </p>
           <div class='images'>
               <div class='mri'>
                   <img src='{{object.img_url}}' width='300'>
