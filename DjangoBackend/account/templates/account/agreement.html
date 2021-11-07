@@ -29,10 +29,6 @@
       <form method='POST' action='{% url "account:check" %}'>
         <div id="form__wrap">
           {% csrf_token %}
-          <input type="hidden" name='name' value={{object.name}}>
-          <input type="hidden" name='email' value={{object.email}}>
-          <input type="hidden" name='password' value={{object.password}}>
-          <input type="hidden" name='hospital' value={{object.hospital}}>
           <ul class="terms__list">
             <li class="terms__box">
               <div class="input__check">

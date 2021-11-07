@@ -44,18 +44,34 @@ def signup(request):
 
             if request.POST['password1']==request.POST['password2']:
 
-                context = {
-                    'email' : request.POST['email'],
-                    'name' : request.POST['name'],
-                    'username' : request.POST['email'],
-                    'password' : request.POST['password1'],
-                    'hospital' : request.POST['hospital']
-                }
+                # contexts = {
+                #     "email" : request.POST["email"],
+                #     "name" : request.POST["name"],
+                #     "username" : request.POST["email"],
+                #     "password" : request.POST["password1"],
+                #     "hospital" : request.POST["hospital"]
+                # }
+
+                
+                # 입력한 개인정보를 session에 넣어서 전달
+                request.session['email'] = request.POST['email']
+                request.session['name'] = request.POST['name']
+                request.session['username'] = request.POST['email']
+                request.session['password'] = request.POST['password1']
+                request.session['hospital'] = request.POST['hospital']
+
+                context = {}
+                context["email"] = request.session["email"]
+                context["name"] = request.session["name"]
+                context["username"] = request.session["username"]
+                context["password"] = request.session["password"]
+                context["hospital"] = request.session["hospital"]
 
                 # 입력한 폼으로 로그인
                 # auth.login(request, user)
                 print('---------------------------------------------정상적으로 약관동의로 넘어감')
-                return render(request, 'account/agreement.html', {'object' : context})
+                # return render(request, 'account/agreement.html', {"object" : context})
+                return render(request, 'account/agreement.html', context)
 
             else:
                 print(1)
@@ -64,7 +80,6 @@ def signup(request):
 
         else:
             print('===========name', request.POST['name'])
-
             if not request.POST['name']:
                 print('이름이 없어요')
                 return render(request, 'account/login.html', {"message" : "이름을 입력해주세요"})
@@ -86,21 +101,27 @@ def signup(request):
 
 def check_agreement(request):
     print('-----------------------------------check_agreement실행')
+    # print(request.GET.get("email"))  # None
+    print(request.session.get("email", 0))  # 성공!!
 
     try:
         user_agreement3=request.POST['agreement3']
         print(user_agreement3)
         user = CustomUser.objects.create_user(
-                    username=request.POST['email'],
-                    email=request.POST['email'],
-                    name=request.POST['name'],
-                    password=request.POST['password'],
-                    hospital=request.POST['hospital'],
+                    username=request.session.get("email"),
+                    email=request.session.get("email"),
+                    name=request.session.get("name"),
+                    password=request.session.get("password"),
+                    hospital=request.session.get("hospital"),
                     agreement1=True,
                     agreement2=True,
                     agreement3=True,
                 )
         auth.login(request, user)
+        del request.session["email"]
+        del request.session["name"]
+        del request.session["password"]
+        del request.session["hospital"]
         print('-----------------------전부 동의한 사람!! 가입완료')
         return render(request, 'home/main.html', {"object" : user, "message" : "회원가입을 축하드립니다"})
 
@@ -111,18 +132,29 @@ def check_agreement(request):
             request.POST['agreement1'] 
             request.POST['agreement2']
             user = CustomUser.objects.create_user(
-                        username=request.POST['email'],
-                        email=request.POST['email'],
-                        name=request.POST['name'],
-                        password=request.POST['password'],
-                        hospital=request.POST['hospital'],
+                        username=request.session.get("email"),
+                        email=request.session.get("email"),
+                        name=request.session.get("name"),
+                        password=request.session.get("password"),
+                        hospital=request.session.get("hospital"),
                         agreement1=True,
                         agreement2=True,
                     )
+            del request.session["email"]
+            del request.session["name"]
+            del request.session["password"]
+            del request.session["hospital"]
             print('-----------------------광고 미동의')
             auth.login(request, user)
             return render(request, 'home/main.html', {"object": user, "message" : "회원가입을 축하드립니다"})
 
         except:
+            del request.session["email"]
+            del request.session["name"]
+            del request.session["password"]
+            del request.session["hospital"]
             return render(request, 'home/main.html', {"message" : "회원가입이 취소되었습니다."})
+        
+        
+
         
