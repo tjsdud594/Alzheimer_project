@@ -13,15 +13,15 @@ python -m venv django # 원하는 가상환경 이름을 설정
 ```
 conda activate django
 ```
--패키지 설치
+- 패키지 설치
 ```
 pip install -r requirement.txt
 ```
--  서버실행
+- 서버 실행
 ```
 python manage.py runserver
 ```
-<p>
+<!-- <p>
 - ref 
 https://wikidocs.net/53383
 </p>
@@ -55,3 +55,4 @@ https://wikidocs.net/53383
 <br>
 </p>
 - .gitattributes : 임시모델 weight 저장 값(10/27 기준)
+ -->
