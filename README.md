@@ -1,5 +1,26 @@
 # Alzheimer_project
+VRAIN은 백엔드 프레임워크 Django 와 오픈소스 데이터베이스인 PostgreSQL을 사용하여 데이터베이스를 구축한다.\
 
+## Requirements
+- requirements.txt
+
+## How to runserver?
+- 가상환경 생성
+``` 
+python -m venv django # 원하는 가상환경 이름을 설정
+```
+- 가상환경 실행
+```
+conda activate django
+```
+-패키지 설치
+```
+pip install -r requirement.txt
+```
+-  서버실행
+```
+python manage.py runserver
+```
 <p>
 - ref 
 https://wikidocs.net/53383
