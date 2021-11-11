@@ -75,7 +75,7 @@ https://wikidocs.net/53383
 
 ## Preview
 - main<br>
- > 서비스 개발 소개
+ > 서비스 개발 소개 <br>
 ![main](https://user-images.githubusercontent.com/84279479/141241124-3014bc7f-f011-4b66-8fb0-18440d155641.gif)
 
 
