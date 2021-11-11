@@ -75,6 +75,7 @@ https://wikidocs.net/53383
 
 ## Preview
 - main
-https://user-images.githubusercontent.com/84279479/141238377-3434c791-58af-4b6f-996d-492ecc2c91cc.mp4
+
+<!-- https://user-images.githubusercontent.com/84279479/141238377-3434c791-58af-4b6f-996d-492ecc2c91cc.mp4 -->
 
 - join/login
