@@ -35,7 +35,7 @@ python manage.py runserver
 ```
 deactivate
 ```
-## 
+<!-- ##  -->
 <!-- <p>
 - ref 
 https://wikidocs.net/53383
@@ -75,7 +75,9 @@ https://wikidocs.net/53383
 
 ## Preview
 - main<br>
+ > 서비스 개발 소개
 ![main](https://user-images.githubusercontent.com/84279479/141241124-3014bc7f-f011-4b66-8fb0-18440d155641.gif)
+
 
 - join/login<br>
 ![login](https://user-images.githubusercontent.com/84279479/141241709-d0cda9de-86c8-465b-884d-b58dcab55685.gif)
