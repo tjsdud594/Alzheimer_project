@@ -74,14 +74,14 @@ https://wikidocs.net/53383
 
 
 ## Preview
-- main
+- main<br>
 ![main](https://user-images.githubusercontent.com/84279479/141241124-3014bc7f-f011-4b66-8fb0-18440d155641.gif)
 
-- join/login
+- join/login<br>
 ![login](https://user-images.githubusercontent.com/84279479/141241709-d0cda9de-86c8-465b-884d-b58dcab55685.gif)
 
-- predict
+- predict<br>
 ![predict](https://user-images.githubusercontent.com/84279479/141242115-98447afb-6da0-43f9-be33-a2c5b74a6708.gif)
 
-- mypage
+- mypage<br>
 ![mypage](https://user-images.githubusercontent.com/84279479/141242012-2d42ae4c-3216-4587-b014-b981f5c47126.gif)
