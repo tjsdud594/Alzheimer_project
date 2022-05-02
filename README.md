@@ -1,6 +1,9 @@
 # Alzheimer_project
 VRAIN은 백엔드 프레임워크 Django 와 오픈소스 데이터베이스인 PostgreSQL을 사용하여 데이터베이스를 구축한다.
 
+# 프로젝트 진행과정
+> https://www.notion.so/2021-Innovative-Growth-Course-Team-Five-s-Project-e26a2c0b573e4b2d88236e649b850020
+
 ## Requirements
 - requirements.txt
 
